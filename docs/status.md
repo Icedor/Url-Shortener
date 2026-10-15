@@ -11,7 +11,9 @@ The initial background was an unauthorized simplified interpretation of the refe
 - [x] PHP/JS syntax, 37 existing HTTP assertions, 240 reference animation frame comparisons and eight page/language metadata checks passed.
 - [x] In-app browser verified SV/EN switching, keyboard activation, saved preference on reload, and no horizontal overflow at 1280px/320px.
 - [ ] Visual screenshot comparison remains blocked: both screenshot APIs fail and the CDP screenshot request times out. DOM and console inspection work in the in-app browser; Chrome still fails its request-header policy connection.
-- [ ] Commit, push and verify the deployed correction.
+- [x] Commit and push correction ea73fd7; GitHub main matched. Deploy only the four changed runtime files, then download and verify all four SHA-256 hashes against the committed archive. Eleven live page/language and asset checks passed.
+
+Production source before deployment matched the previous commit exactly. Rollback copies, the committed release archive and SHA-256 manifest are in `%TEMP%/icey-url-canvas-release-20261015/`. No environment, database, cron or sibling-project files changed. The outstanding screenshot comparison above is the only unfinished check for this correction.
 
 ## Interface refinement
 

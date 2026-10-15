@@ -1,5 +1,11 @@
 # Verification
 
+## Published canvas correction — 2026-10-15
+
+Runtime commit `ea73fd74db8227204ec31ae55a6bfed4d37750c1` was pushed and its SHA verified on GitHub. All four existing production files matched the preceding commit before replacement and were downloaded for rollback. Deployment used files extracted from the committed archive; SFTP readback SHA-256 hashes matched for `app/view.php`, `public_html/css/style.css`, `public_html/js/scripts.js` and `public_html/js/background.js`.
+
+Eleven live HTTPS checks passed: homepage, privacy, abuse and missing-link responses in both languages, plus all three changed public assets. Checks covered localized titles, descriptions, Icey headings, social metadata, non-homepage noindex headers, expected response statuses and byte-identical public assets. The screenshot limitation documented below remains unresolved; this is not a claim of completed visual comparison.
+
 ## Canvas and metadata correction — 2026-10-15
 
 Secret and WhoIs share the exact same original canvas source (SHA-256 0F3E22CBE850F2C35D39387F180EAA54D4D8243C62662D172697B7F87E50D381). The previous URL implementation was a different, simplified animation; the normal animation now reuses the reference. Adaptations are tabs, explicit declarations for two implicit loop globals, a context guard, and retaining reduced-motion/hidden-tab lifecycle handling. Geometry, colors, shadow drawing order, collisions, particles and drag/throw calculations are preserved. Overlay opacity now matches 0.7.
