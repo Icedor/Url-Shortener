@@ -14,25 +14,57 @@ function bilingual(string $swedish, string $english): string
 $baseUrl = $config['APP_URL'] ?? 'https://url.icey.se';
 $displayHost = (string) parse_url($baseUrl, PHP_URL_HOST);
 $dayLimit = $config['CREATE_LIMIT_DAY'] ?? 10;
-$title = $language === 'sv' ? 'URL-förkortare – Icey' : 'URL shortener – Icey';
-$description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eget länknamn. Gratis, utan konto och utan automatisk utgångstid.' : 'Shorten a long link or choose your own link name. Free, no account and no automatic expiry.';
+$metadata = match ($page) {
+	'create' => [
+		'title' => ['sv' => 'Icey URL-förkortare – korta länkar utan konto', 'en' => 'Icey URL shortener – short links, no account'],
+		'description' => ['sv' => 'Förkorta länkar gratis på url.icey.se. Välj ett eget länknamn eller låt oss skapa ett åt dig. Inget konto behövs.', 'en' => 'Shorten links for free at url.icey.se. Pick a custom link name or let us generate one for you. No account needed.'],
+	],
+	'report' => [
+		'title' => ['sv' => 'Anmäl en länk | Icey URL-förkortare', 'en' => 'Report a link | Icey URL shortener'],
+		'description' => ['sv' => 'Anmäl en kortlänk på url.icey.se som används för nätfiske, skadlig kod eller spam. Anmälningar granskas manuellt.', 'en' => 'Report a short link on url.icey.se used for phishing, malware or spam. Reports are reviewed manually.'],
+	],
+	'privacy' => [
+		'title' => ['sv' => 'Om tjänsten och integritet | Icey URL-förkortare', 'en' => 'About the service and privacy | Icey URL shortener'],
+		'description' => ['sv' => 'Läs om hur Iceys URL-förkortare fungerar, vilka uppgifter vi sparar och hur vi använder cookies, begränsar missbruk och hanterar säkerhetskopior.', 'en' => 'How Icey URL shortener works, what data we store, and how we use cookies, limit abuse and handle backups.'],
+	],
+	default => [
+		'title' => ['sv' => 'Länken kan inte öppnas | Icey URL-förkortare', 'en' => 'Link unavailable | Icey URL shortener'],
+		'description' => ['sv' => 'Den här kortlänken kan inte öppnas. Kontrollera adressen eller skapa en ny kortlänk på url.icey.se.', 'en' => 'This short link cannot be opened. Check the address or create a new short link at url.icey.se.'],
+	],
+};
+$title = $metadata['title'][$language];
+$description = $metadata['description'][$language];
+
+function localizedMetadata(array $values): string
+{
+	return 'data-content-sv="' . escape($values['sv']) . '" data-content-en="' . escape($values['en']) . '"';
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= escape($language) ?>">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<title><?= escape($title) ?></title>
-	<meta name="description" content="<?= escape($description) ?>">
+	<title data-text-sv="<?= escape($metadata['title']['sv']) ?>" data-text-en="<?= escape($metadata['title']['en']) ?>"><?= escape($title) ?></title>
+	<meta name="description" content="<?= escape($description) ?>" <?= localizedMetadata($metadata['description']) ?>>
 	<meta name="theme-color" content="#0c1016">
 	<meta name="csrf-token" content="<?= escape($token ?? '') ?>">
 	<link rel="icon" href="/favicon.png" type="image/png">
-	<link rel="stylesheet" href="/css/style.css?v=20261015-2">
+	<link rel="stylesheet" href="/css/style.css?v=20261015-3">
 	<?php if ($page === 'create'): ?>
 	<link rel="canonical" href="<?= escape($baseUrl) ?>/">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Icey URL">
+	<meta property="og:url" content="<?= escape($baseUrl) ?>/">
+	<meta property="og:title" content="<?= escape($title) ?>" <?= localizedMetadata($metadata['title']) ?>>
+	<meta property="og:description" content="<?= escape($description) ?>" <?= localizedMetadata($metadata['description']) ?>>
+	<meta property="og:locale" content="<?= $language === 'sv' ? 'sv_SE' : 'en_GB' ?>" data-content-sv="sv_SE" data-content-en="en_GB">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="<?= escape($title) ?>" <?= localizedMetadata($metadata['title']) ?>>
+	<meta name="twitter:description" content="<?= escape($description) ?>" <?= localizedMetadata($metadata['description']) ?>>
 	<?php endif; ?>
-	<script src="/js/scripts.js?v=20261015-2" defer></script>
-	<script src="/js/background.js" defer></script>
+	<script src="/js/scripts.js?v=20261015-3" defer></script>
+	<script src="/js/background.js?v=20261015-3" defer></script>
 </head>
 <body>
 	<a class="skip-link" href="#main"><?= bilingual('Hoppa till innehåll', 'Skip to content') ?></a>
@@ -62,8 +94,7 @@ $description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eg
 			<p class="small-info"><?= bilingual('Utan konto. Ingen automatisk utgångstid.', 'No account. No automatic expiry.') ?><br><?= bilingual("Max {$dayLimit} länkar per IP-adress under 24 timmar. Personer på samma nätverk delar kvoten.", "Up to {$dayLimit} links per IP address over 24 hours. People on the same network share the allowance.") ?></p>
 		</section>
 		<section class="panel" id="result-view" hidden aria-labelledby="result-heading">
-			<p class="eyebrow"><?= bilingual('Klart!', 'All done!') ?></p>
-			<h2 id="result-heading" tabindex="-1"><?= bilingual('Redo att delas', 'Ready to share') ?></h2>
+			<h2 id="result-heading" tabindex="-1"><?= bilingual('Din länk är skapad', 'Your link is ready') ?></h2>
 			<label for="short-link"><?= bilingual('Din korta länk', 'Your short link') ?></label>
 			<div class="link-display"><input id="short-link" type="text" readonly><button class="button-small" type="button" id="copy-button"><?= bilingual('Kopiera', 'Copy') ?></button></div>
 			<p id="copy-status" class="hint" role="status"></p>

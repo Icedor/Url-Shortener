@@ -7,6 +7,8 @@ Read this file at every project start. User decisions take precedence. Propose i
 - Use modern native HTML, CSS, JavaScript and PHP, with standard libraries. No external dependencies, frameworks, build tools, CDN resources or services without explicit approval.
 - Use tabs for indentation and English identifiers and comments. Preserve reference design and working behavior. Ask if design evidence is missing.
 - Reference projects guide design and code only; their permissions, dependencies and project rules do not transfer here.
+- Reuse the original Secret/WhoIs canvas rendering and physics; do not replace them with a visual approximation. Preserve the Icey console signature. Keep existing reduced-motion and hidden-tab handling without changing normal animation behavior.
+- Write factual, natural Swedish and English metadata for each page. Preserve Icey branding and avoid generic promotional filler. Keep document titles, descriptions and social metadata aligned when switching language.
 - Match WhoIs and Secret under the sibling project directories. Serve at https://url.icey.se, in Swedish and English, with browser-language detection and an upper-right language switch.
 - Use the visible heading "Icey URL-förkortare" / "Icey URL shortener". Preserve the Icey brand when changing wording. Keep the form introduction concise without promotional filler. "Shorten another" uses the established primary button style.
 - SQLite is approved. Public creation, no accounts and no user editing. Optional custom alias, otherwise random. Show availability in text and color and enforce uniqueness at insertion.

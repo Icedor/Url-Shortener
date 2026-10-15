@@ -59,7 +59,7 @@
 	function setLanguage(next, save = true) {
 		language = next;
 		document.documentElement.lang = language;
-		document.title = language === 'sv' ? 'URL-förkortare – Icey' : 'URL shortener – Icey';
+		document.querySelectorAll('[data-content-sv]').forEach((element) => { element.content = element.dataset[language === 'sv' ? 'contentSv' : 'contentEn']; });
 		document.querySelectorAll('[data-language]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.language === language)));
 		document.querySelectorAll('[data-placeholder-sv]').forEach((input) => { input.placeholder = input.dataset[language === 'sv' ? 'placeholderSv' : 'placeholderEn']; });
 		document.querySelectorAll('[data-text-sv]').forEach((element) => { element.textContent = element.dataset[language === 'sv' ? 'textSv' : 'textEn']; });
@@ -225,3 +225,13 @@
 		});
 	}
 })();
+
+console.log(String.raw`
+        ██╗ ██████╗███████╗██╗   ██╗
+        ██║██╔════╝██╔════╝╚██╗ ██╔╝
+        ██║██║     █████╗   ╚████╔╝
+        ██║██║     ██╔══╝    ╚██╔╝
+        ██║╚██████╗███████╗   ██║
+        ╚═╝ ╚═════╝╚══════╝   ╚═╝
+        Icey.se
+        `);

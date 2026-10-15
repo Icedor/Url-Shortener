@@ -1,5 +1,17 @@
 # Verification
 
+## Canvas and metadata correction — 2026-10-15
+
+Secret and WhoIs share the exact same original canvas source (SHA-256 0F3E22CBE850F2C35D39387F180EAA54D4D8243C62662D172697B7F87E50D381). The previous URL implementation was a different, simplified animation; the normal animation now reuses the reference. Adaptations are tabs, explicit declarations for two implicit loop globals, a context guard, and retaining reduced-motion/hidden-tab lifecycle handling. Geometry, colors, shadow drawing order, collisions, particles and drag/throw calculations are preserved. Overlay opacity now matches 0.7.
+
+PHP lint and both changed JavaScript syntax checks passed. The existing HTTP suite passed all 37 assertions. A deterministic comparison with the original source passed 120 frames at 390px and 120 at 1280px, comparing all drawing calls and style assignments. Reduced motion and hidden tabs stop the animation loop. The comparison script and localized HTTP metadata checks are retained privately in artifacts/canvas-seo/check.mjs; run from the project root with the sibling reference source present and local preview on port 8093.
+
+Metadata checks covered home, privacy, report and missing-link pages in both languages. Non-home pages still send noindex/nofollow. Home descriptions now describe free shortening, custom names and no account requirement. Document title, description, Open Graph and Twitter text share server-provided translations; switching language updates them together. No external resources or analytics were added. Visible Icey headings remain unchanged. The redundant result slogan was replaced with a direct confirmation.
+
+The in-app browser confirmed the console signature, no captured application errors at inspection, English and Swedish titles/descriptions/social metadata after switching, Enter-key activation with a solid focus outline, and Swedish preference after reload. DOM checks found no horizontal overflow at 1280px and 320px. Viewport and visibility overrides were reset.
+
+Limit: screenshot capture fails through both normal APIs and the alternative CDP screenshot command times out. No new visual screenshots or pixel-level browser comparison were completed. The drawing-command comparison establishes normal animation equivalence, not browser screenshot equivalence.
+
 ## Interface refinement — 2026-10-15
 
 - Removed both introductory slogans; main heading and initial/dynamic document titles now use "URL-förkortare" / "URL shortener".

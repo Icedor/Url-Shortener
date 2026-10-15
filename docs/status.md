@@ -1,5 +1,18 @@
 # Status — 2026-10-15
 
+## Canvas, console credit and metadata correction
+
+The initial background was an unauthorized simplified interpretation of the reference animation. It changed geometry, movement and drawing order, omitted collision/particle behavior and used a 73.3% black overlay instead of 70%. It has now been replaced with the original shared Secret/WhoIs implementation. The original console signature is restored. See [verification](verification.md) for the exact adaptations and test limits.
+
+- [x] User reconfirmed synchronized Drive and exclusive writer. Fetch showed a clean worktree and matching HEAD/origin/main at 136fb5c.
+- [x] Compare identical Secret/WhoIs background sources and restore the original rendering, physics and overlay.
+- [x] Restore the exact Icey console signature and verify it in the browser log.
+- [x] Rewrite SV/EN page titles and descriptions; add matching homepage social metadata; keep metadata synchronized with language selection.
+- [x] PHP/JS syntax, 37 existing HTTP assertions, 240 reference animation frame comparisons and eight page/language metadata checks passed.
+- [x] In-app browser verified SV/EN switching, keyboard activation, saved preference on reload, and no horizontal overflow at 1280px/320px.
+- [ ] Visual screenshot comparison remains blocked: both screenshot APIs fail and the CDP screenshot request times out. DOM and console inspection work in the in-app browser; Chrome still fails its request-header policy connection.
+- [ ] Commit, push and verify the deployed correction.
+
 ## Interface refinement
 
 Follow-up correction: the user requires Icey to remain in the visible heading. The only runtime change is restoring that prefix: "Icey URL-förkortare" / "Icey URL shortener". Page titles already include Icey and are unchanged.
