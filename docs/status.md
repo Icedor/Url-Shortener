@@ -7,7 +7,7 @@
 - [x] Reuse the existing primary button treatment for "Shorten another"; remove unused text-button/intro styles.
 - [x] Measure storage: production SQLite and its existing backup were 36 KiB each; workspace was 278,340 bytes before this refinement. Only URLs and metadata are stored, not destination content.
 - [x] Verify desktop/mobile, both languages and keyboard reset behavior; PHP/JS syntax checks passed.
-- [ ] Publish the refinement, verify matching GitHub/production files and record the result.
+- [x] Publish the refinement as 471d887; downloaded all three changed files and verified hashes against that commit. Live SV/EN headings, titles, removed intro and primary reset-button markup verified. No browser console errors at inspection.
 
 ## Initial release
 
@@ -37,6 +37,6 @@ The application source was committed as `335ff2faa5ae8ac5b00175aeed3329803ed4656
 
 Local preview data contains only example.com/example.org test links and must never be deployed. Temporary HTTP/service test databases were isolated under the OS temporary directory. The preview process is stopped at handover; restart it using operations.md.
 
-Current release uses the verified application from 81ffd4ce92eb4bc9452e2368d4f61656d967cde4 plus a privacy-text clarification about seven-day backups. All 12 deployed app/bin/public_html files match the reviewed worktree byte-for-byte. The commit containing this release record identifies the final version. Private deployment verification artifacts are ignored under artifacts/. Temporary restore snapshots were removed after verification; the ordinary weekday backup remains.
+Current application release is 471d887, including the interface refinement above. The initial 12 deployed app/bin/public_html files were verified byte-for-byte; all three changed files were verified again against the refinement commit. Subsequent documentation commits do not alter runtime files. Private deployment verification artifacts and previous source copies are ignored under artifacts/. Temporary restore snapshots were removed after verification; the ordinary weekday backup remains.
 
 Ongoing operations: check the daily cron log and pending abuse reports via SFTP, investigate reports and apply CLI moderation as needed. Backups rotate on the hosting account; independent off-site storage and automatic notifications are not configured. Public creation cannot guarantee malware detection without external services, which remain unapproved. No application work is blocked by SSH shell restrictions.
