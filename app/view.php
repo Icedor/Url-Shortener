@@ -14,7 +14,7 @@ function bilingual(string $swedish, string $english): string
 $baseUrl = $config['APP_URL'] ?? 'https://url.icey.se';
 $displayHost = (string) parse_url($baseUrl, PHP_URL_HOST);
 $dayLimit = $config['CREATE_LIMIT_DAY'] ?? 10;
-$title = $language === 'sv' ? 'Icey URL – Korta länkar, enkelt.' : 'Icey URL – Short links, simply.';
+$title = $language === 'sv' ? 'URL-förkortare – Icey' : 'URL shortener – Icey';
 $description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eget länknamn. Gratis, utan konto och utan automatisk utgångstid.' : 'Shorten a long link or choose your own link name. Free, no account and no automatic expiry.';
 ?>
 <!DOCTYPE html>
@@ -27,11 +27,11 @@ $description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eg
 	<meta name="theme-color" content="#0c1016">
 	<meta name="csrf-token" content="<?= escape($token ?? '') ?>">
 	<link rel="icon" href="/favicon.png" type="image/png">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css?v=20261015-2">
 	<?php if ($page === 'create'): ?>
 	<link rel="canonical" href="<?= escape($baseUrl) ?>/">
 	<?php endif; ?>
-	<script src="/js/scripts.js" defer></script>
+	<script src="/js/scripts.js?v=20261015-2" defer></script>
 	<script src="/js/background.js" defer></script>
 </head>
 <body>
@@ -42,10 +42,9 @@ $description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eg
 		<button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="<?= $language === 'en' ? 'true' : 'false' ?>">EN</button>
 	</nav>
 	<main class="container" id="main" tabindex="-1">
-		<h1><a href="/">Icey URL</a></h1>
+		<h1><a href="/"><?= bilingual('URL-förkortare', 'URL shortener') ?></a></h1>
 		<?php if ($page === 'create'): ?>
 		<section class="panel" id="create-view">
-			<p class="intro"><strong><?= bilingual('Långa länkar. Kort och enkelt.', 'Long links. Short and simple.') ?></strong><?= bilingual('Klistra in din länk och gör den redo att delas.', 'Paste your link and get it ready to share.') ?></p>
 			<form id="create-form" method="post">
 				<label for="destination"><?= bilingual('Länken du vill förkorta', 'The link you want to shorten') ?></label>
 				<input id="destination" name="url" type="url" placeholder="https://example.com/…" required maxlength="4096" autocomplete="url" inputmode="url" autocapitalize="none" spellcheck="false" aria-describedby="url-hint">
@@ -70,7 +69,7 @@ $description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eg
 			<p id="copy-status" class="hint" role="status"></p>
 			<p class="destination-caption"><?= bilingual('Leder till', 'Leads to') ?><br><span id="result-destination" dir="auto"></span></p>
 			<p class="small-info"><?= bilingual('Ingen automatisk utgångstid. Spara länken – den kan inte ändras i efterhand.', 'No automatic expiry. Save your link – it cannot be edited afterwards.') ?></p>
-			<button class="text-button" type="button" id="reset-button"><?= bilingual('Förkorta en till', 'Shorten another') ?> <span aria-hidden="true">↗</span></button>
+			<div class="form-actions"><button class="primary" type="button" id="reset-button"><span><?= bilingual('Förkorta en till', 'Shorten another') ?></span></button></div>
 		</section>
 		<?php elseif ($page === 'report'): ?>
 		<section class="panel">

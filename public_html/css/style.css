@@ -29,8 +29,6 @@ h1 a { color: white; text-decoration: none; }
 h2 { margin: 0 0 1rem; font-size: 1.65rem; font-weight: 500; letter-spacing: -.02em; }
 p { color: var(--muted); line-height: 1.6; }
 .panel { padding: 2rem; border: 1px solid #ffffff09; border-radius: var(--radius); background: #ffffff0d; backdrop-filter: blur(5px); }
-.intro { margin: 0 0 2rem; color: #d7dde4; }
-.intro strong { display: block; margin-bottom: .3rem; font-size: 1.2rem; font-weight: 500; color: white; }
 form { display: flex; flex-direction: column; }
 label { display: block; margin-bottom: .6rem; font-size: .95rem; font-weight: 500; }
 .optional { font-size: .85rem; font-weight: 400; color: var(--muted); }
@@ -68,9 +66,7 @@ input:focus, select:focus { outline: 0; border-color: var(--yellow); box-shadow:
 .button-small:hover { background: var(--yellow); }
 .destination-caption { font-size: .85rem; }
 #result-destination { display: block; margin-top: .3rem; color: #e2e6eb; overflow-wrap: anywhere; }
-.text-button { margin-top: 1.5rem; padding: .4rem 0; border: 0; background: none; color: #69dac1; text-decoration: underline; text-underline-offset: .3em; }
-.text-button:hover { color: var(--yellow); }
-.text-button span[aria-hidden] { display: inline-block; margin-left: .5rem; }
+#result-view .form-actions { margin-top: 1.5rem; }
 .language-switch { position: absolute; z-index: 4; top: 1.5rem; right: 2rem; display: flex; gap: .2rem; align-items: center; color: #53606d; }
 .language-switch button { border: 0; border-radius: .25rem; min-width: 44px; min-height: 44px; padding: .5rem; color: #a8b2c0; background: none; font-size: .85rem; }
 .language-switch button[aria-pressed="true"] { color: #fff; font-weight: 700; text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: .5rem; }

@@ -8,6 +8,7 @@ Read this file at every project start. User decisions take precedence. Propose i
 - Use tabs for indentation and English identifiers and comments. Preserve reference design and working behavior. Ask if design evidence is missing.
 - Reference projects guide design and code only; their permissions, dependencies and project rules do not transfer here.
 - Match WhoIs and Secret under the sibling project directories. Serve at https://url.icey.se, in Swedish and English, with browser-language detection and an upper-right language switch.
+- Use the visible heading "URL-förkortare" / "URL shortener". Keep the form introduction concise without promotional filler. "Shorten another" uses the established primary button style.
 - SQLite is approved. Public creation, no accounts and no user editing. Optional custom alias, otherwise random. Show availability in text and color and enforce uniqueness at insertion.
 - Links have no automatic expiration. Never reuse a previously allocated alias. Operators can disable links and block destination domains through a server-side CLI.
 - Default creation quota: 10 successful creations per IP in a rolling 24 hours, and 5 per rolling minute. Throttle availability checks and attempts separately. Explain shared-IP quotas and retry timing.

@@ -1,5 +1,16 @@
 # Status — 2026-10-15
 
+## Interface refinement
+
+- [x] Fetch and compare: worktree and GitHub matched be996835d7c9cfffb11f1f3996c74b77352d4428. Continue the same session under the user's Drive sync/exclusive-writer confirmation.
+- [x] Remove the introductory slogans in both languages; translate the main heading and document title to URL-förkortare / URL shortener.
+- [x] Reuse the existing primary button treatment for "Shorten another"; remove unused text-button/intro styles.
+- [x] Measure storage: production SQLite and its existing backup were 36 KiB each; workspace was 278,340 bytes before this refinement. Only URLs and metadata are stored, not destination content.
+- [x] Verify desktop/mobile, both languages and keyboard reset behavior; PHP/JS syntax checks passed.
+- [ ] Publish the refinement, verify matching GitHub/production files and record the result.
+
+## Initial release
+
 - [x] Confirm requirements, SQLite and abuse policy with user.
 - [x] Confirm Drive synchronization and exclusive writer with user.
 - [x] Inspect initial local/remote state; create Git metadata outside Drive; fetch empty remote.
