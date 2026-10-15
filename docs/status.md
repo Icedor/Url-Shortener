@@ -18,7 +18,7 @@
 - [x] Disable three release test links, review the test report, verify a consistent backup and isolated restore.
 - [x] Test the maintenance command and save daily 03:17 server-time scheduling with seven rotating backups.
 - [x] Update release documentation and Uppgifter.txt; compare all 12 deployed source files using SHA-256.
-- [ ] Push the release record and verify GitHub's final commit.
+- [x] Push the release record and verify GitHub's final commit.
 
 Resolved: after the user authorized the existing key, icey_cpanel works over SFTP. Interactive shell is disabled, which does not block deployment. cPanel cron and PHP 8.5 successfully executed the project's private CLI. Production is live; changes were scoped to /home/icey/url.icey.se and its own cron entry. Other projects and their existing jobs were preserved.
 
