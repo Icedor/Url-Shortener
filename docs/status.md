@@ -2,6 +2,11 @@
 
 ## Interface refinement
 
+Follow-up correction: the user requires Icey to remain in the visible heading. The only runtime change is restoring that prefix: "Icey URL-förkortare" / "Icey URL shortener". Page titles already include Icey and are unchanged.
+
+- [x] Restore Icey in both heading translations.
+- [x] Verify and publish the heading correction: PHP lint, deployed file hash, live SV/EN headings, 320px mobile layout and keyboard language switching passed. Only app/view.php changed at runtime.
+
 - [x] Fetch and compare: worktree and GitHub matched be996835d7c9cfffb11f1f3996c74b77352d4428. Continue the same session under the user's Drive sync/exclusive-writer confirmation.
 - [x] Remove the introductory slogans in both languages; translate the main heading and document title to URL-förkortare / URL shortener.
 - [x] Reuse the existing primary button treatment for "Shorten another"; remove unused text-button/intro styles.
@@ -37,6 +42,6 @@ The application source was committed as `335ff2faa5ae8ac5b00175aeed3329803ed4656
 
 Local preview data contains only example.com/example.org test links and must never be deployed. Temporary HTTP/service test databases were isolated under the OS temporary directory. The preview process is stopped at handover; restart it using operations.md.
 
-Current application release is 471d887, including the interface refinement above. The initial 12 deployed app/bin/public_html files were verified byte-for-byte; all three changed files were verified again against the refinement commit. Subsequent documentation commits do not alter runtime files. Private deployment verification artifacts and previous source copies are ignored under artifacts/. Temporary restore snapshots were removed after verification; the ordinary weekday backup remains.
+Current application release includes the interface refinement from 471d887 and the one-line Icey heading restoration recorded above. The initial 12 deployed app/bin/public_html files were verified byte-for-byte; the three refined files and the subsequent heading correction were verified again after deployment. The commit containing this correction identifies the current release. Private deployment verification artifacts and previous source copies are ignored under artifacts/. Temporary restore snapshots were removed after verification; the ordinary weekday backup remains.
 
 Ongoing operations: check the daily cron log and pending abuse reports via SFTP, investigate reports and apply CLI moderation as needed. Backups rotate on the hosting account; independent off-site storage and automatic notifications are not configured. Public creation cannot guarantee malware detection without external services, which remain unapproved. No application work is blocked by SSH shell restrictions.

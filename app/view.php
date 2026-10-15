@@ -42,7 +42,7 @@ $description = $language === 'sv' ? 'Förkorta en lång länk eller välj ett eg
 		<button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="<?= $language === 'en' ? 'true' : 'false' ?>">EN</button>
 	</nav>
 	<main class="container" id="main" tabindex="-1">
-		<h1><a href="/"><?= bilingual('URL-förkortare', 'URL shortener') ?></a></h1>
+		<h1><a href="/"><?= bilingual('Icey URL-förkortare', 'Icey URL shortener') ?></a></h1>
 		<?php if ($page === 'create'): ?>
 		<section class="panel" id="create-view">
 			<form id="create-form" method="post">
