@@ -12,6 +12,8 @@ Environment checks completed on 2026-10-15:
 - `tests/run.php`: 112 assertions passed, including 32 concurrent PHP workers. Covers allowed/rejected destinations, local/private address literals, alias validation and reservation, case-insensitive uniqueness, query/fragment preservation, random codes, abuse reports, review, link disabling, parent-domain blocking, backup integrity, quota boundaries/retry timing, separate request throttling and language selection.
 - `tests/http.mjs`: 37 assertions passed against an isolated temporary PHP server. Covers initial Swedish HTML, security/cookie/cache headers, invalid CSRF, method/type/body-size validation, availability, creation, conflicts, redirects and HEAD, reports, quotas and Retry-After, spoofed forwarding headers, private-path denial and language-cookie priority.
 - PHP and browser JavaScript syntax checks passed. No external test packages are used.
+- Staged-file secret scan passed before the first commit: real local/production IP hash keys, private-key material and common GitHub token formats were absent. Both private .env files are ignored; no .git file or directory exists inside Drive.
+- Source commit `335ff2faa5ae8ac5b00175aeed3329803ed4656a` was pushed successfully and checked against GitHub main using git ls-remote.
 - A cache-header test found that PHP's default session cache limiter overwrote the explicit header; fixed by disabling that limiter while retaining the explicit no-store header.
 
 ## Browser verification

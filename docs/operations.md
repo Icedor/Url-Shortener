@@ -10,6 +10,8 @@
 
 Initial check on 2026-10-15: user confirmed Drive sync and sole writer; Dev/public_html was empty; GitHub returned no refs; fetch succeeded. Git metadata created in local AppData, whose checked ancestors are not reparse points. Drive's registered backup-root table was empty. Git Credential Manager already lists Icedor; the existing saved credential is reused. No new personal access token is needed if it can push; never promise an irrevocable or permanent token.
 
+Write access subsequently verified: the first source commit was successfully pushed and its remote SHA matched. No new credential was created and no 2FA was required. Keep using the existing Git Credential Manager registration; its future validity is controlled by GitHub/account settings and is not guaranteed forever.
+
 ## Environment and local runtime
 
 PHP 8.2+ with PDO SQLite is required. Local PHP is `C:/Users/hello/scoop/apps/php/current/php.exe` (8.5.9). Its PDO SQLite DLL is installed but not enabled by default; use `-d extension=php_pdo_sqlite.dll` for project commands. Do not modify the global PHP installation.
