@@ -22,7 +22,9 @@ Keep `.env.local` in Dev, excluded from Git. Runtime SQLite files must be on a l
 
 Deploy when the user requests "pusha live". Connection details are in private `.env.production` and `URL/Dokument/Uppgifter.txt`. After the user authorized the existing key, SFTP with `icey_cpanel` succeeded on port 22. Its fingerprint is recorded in Uppgifter.txt. The key is named MaximusDatorus in cPanel. Interactive shell is disabled, but SFTP works; this is not a deployment blocker and does not require the user to enable shell access.
 
-Verified remote project root: `/home/icey/url.icey.se`; public webroot: `/home/icey/url.icey.se/public_html`. SFTP including hidden files showed only `.well-known` and `cgi-bin` before publication. Preserve both. PHP Selector shows account PHP 8.5 with PDO SQLite enabled. cPanel exposes Cron Management, and SFTP confirmed `/opt/alt/php85/usr/bin/php` exists. No account-wide PHP settings or cron jobs were changed. Actual execution for this site, Apache/LiteSpeed rewrites and SQLite locking remain to be checked at release.
+Verified remote project root: `/home/icey/url.icey.se`; public webroot: `/home/icey/url.icey.se/public_html`. SFTP including hidden files showed only `.well-known` and `cgi-bin` before publication; both were preserved. PHP Selector shows account PHP 8.5 with PDO SQLite enabled. Production web execution, rewrites, concurrent SQLite insertion and cron execution were verified during release on 2026-10-15. PHP CLI is `/opt/alt/php85/usr/bin/php`. No account-wide PHP settings or other projects' cron jobs were changed.
+
+The user explicitly permits cPanel use and asks for an explanation before checks or changes. SSH authentication succeeds, but executing `crontab -l` returns "Shell access is not enabled on your account" despite exit status 0. Do not interpret that exit status as successful execution. Use SFTP for files and cPanel cron for private CLI operations. No public HTTP administration endpoint exists.
 
 The private `URL/Dokument/Uppgifter.txt` is outside this repo. Preserve its existing formatting and credentials; append verified operational facts without duplicating secrets into documentation.
 
@@ -59,4 +61,18 @@ Run with the production ICEY_ENV_FILE prefix above via cPanel cron when shell lo
 - `cleanup`: delete quota identifiers older than 24 hours. API writes also perform this cleanup.
 - `backup /absolute/private/path/new-file.sqlite`: take a consistent VACUUM INTO snapshot. Download that completed snapshot using SFTP; do not copy a live SQLite file or separate WAL sidecars.
 
-Restore a tested snapshot only during a maintenance window with writes stopped, preserving a copy of the current database first. Never restore test data over production. Production backup cadence and operator report-review routine must be agreed before opening the service to ongoing public use.
+Restore a tested snapshot only during a maintenance window with writes stopped, preserving a copy of the current database first. Never restore test data over production. The release snapshot passed integrity checking and an isolated restore with a new write; production itself was not overwritten for this test.
+
+## Scheduled maintenance and review
+
+One project-specific cPanel entry runs at `17 3 * * *` (server time). It removes expired quota records, creates a consistent snapshot in a new private file, replaces that weekday's backup only after success, and exports up to 100 pending abuse reports. Seven weekday slots are retained. A temporary every-minute run verified the exact command before switching to the daily schedule.
+
+```sh
+umask 077; export ICEY_ENV_FILE=/home/icey/url.icey.se/.env.production; backup=/home/icey/url.icey.se/var/backup-$(date +\%u).sqlite; { /opt/alt/php85/usr/bin/php /home/icey/url.icey.se/bin/manage.php cleanup && /opt/alt/php85/usr/bin/php /home/icey/url.icey.se/bin/manage.php backup "$backup.new" && mv -- "$backup.new" "$backup" && /opt/alt/php85/usr/bin/php /home/icey/url.icey.se/bin/manage.php reports > /home/icey/url.icey.se/var/pending-reports.json; } > /home/icey/url.icey.se/var/cron.log 2>&1
+```
+
+The escaped percent is required in a cron command; remove its backslash if running manually in a normal shell. Existing snapshots are preserved if creation fails. If interruption leaves `backup-N.sqlite.new`, inspect it and move it to a private recovery name before retrying; do not blindly overwrite it.
+
+The service operator should check `var/cron.log` and `var/pending-reports.json` daily through SFTP, investigate reports, disable abusive links or block domains, then mark reports reviewed. There are no automatic notifications or malware classification. No messages are sent to third parties. Download completed snapshots for independent storage when required; the automated seven-day rotation is on the same hosting account, not an off-site backup.
+
+Private directories have mode 0700, configuration/application/CLI/database/backup files 0600, public assets 0644 and asset directories 0755. Never copy a live database or its WAL files individually.

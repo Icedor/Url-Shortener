@@ -26,4 +26,4 @@ The tests use standard libraries and isolated temporary databases. Node 22.16+ i
 
 ## Operate
 
-`bin/manage.php` provides initialization, abuse report review, link disabling, domain blocking, cleanup and consistent backups. On hosting without an interactive shell, PHP commands can run through cPanel cron. See [operations](docs/operations.md) before deployment. No production release has been made yet.
+`bin/manage.php` provides initialization, abuse report review, link disabling, domain blocking, cleanup and consistent backups. On hosting without an interactive shell, PHP commands run through cPanel cron. The service was published at https://url.icey.se on 2026-10-15. See [operations](docs/operations.md) and [verification](docs/verification.md).

@@ -36,6 +36,7 @@ Read this file at every project start. User decisions take precedence. Propose i
 - Maintain a secret-free .env.example and ignore private files, runtime data, caches and build residue. Check tracked files too.
 - The user's private URL/Dokument/Uppgifter.txt stores operational details; do not print existing credentials. Keep new application secrets in the .env file and document its location.
 - Do not modify other projects on the shared Icey cPanel account.
+- cPanel use is authorized. Explain the intended check or change before opening it; restrict changes to this project. Production maintenance uses private CLI commands through cPanel cron, with daily cleanup and seven rotating backups.
 - When the user says "pusha live", verify, update docs, commit and push relevant files, deploy the same version, and verify GitHub and production. Do not request the same approval again. Report failed steps.
 
 ## Execution
