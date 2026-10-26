@@ -63,7 +63,7 @@ function localizedMetadata(array $values): string
 	<meta name="twitter:title" content="<?= escape($title) ?>" <?= localizedMetadata($metadata['title']) ?>>
 	<meta name="twitter:description" content="<?= escape($description) ?>" <?= localizedMetadata($metadata['description']) ?>>
 	<?php endif; ?>
-	<script src="/js/scripts.js?v=20261015-3" defer></script>
+	<script src="/js/scripts.js?v=20261026-console" defer></script>
 	<script src="/js/background.js?v=20261015-3" defer></script>
 </head>
 <body>

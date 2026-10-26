@@ -226,12 +226,11 @@
 	}
 })();
 
-console.log(String.raw`
-        ██╗ ██████╗███████╗██╗   ██╗
-        ██║██╔════╝██╔════╝╚██╗ ██╔╝
-        ██║██║     █████╗   ╚████╔╝
-        ██║██║     ██╔══╝    ╚██╔╝
-        ██║╚██████╗███████╗   ██║
-        ╚═╝ ╚═════╝╚══════╝   ╚═╝
-        Icey.se
-        `);
+// Match GlobeRTS: explicit monospace metrics keep console glyphs aligned.
+console.log('%c' + String.raw`██╗ ██████╗███████╗██╗   ██╗
+██║██╔════╝██╔════╝╚██╗ ██╔╝
+██║██║     █████╗   ╚████╔╝
+██║██║     ██╔══╝    ╚██╔╝
+██║╚██████╗███████╗   ██║
+╚═╝ ╚═════╝╚══════╝   ╚═╝
+Icey.se`, 'font-family:Menlo,Consolas,monospace;font-size:11px;line-height:1.2;white-space:pre');
